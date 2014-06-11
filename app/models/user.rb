@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :projects
   has_many :todos
   has_many :projects
-  
-  sync :all
-  
+
+  # sync :all
+
 end

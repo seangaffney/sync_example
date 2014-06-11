@@ -19,8 +19,8 @@
     <col/>
   </colgroup>
   <tbody>
-    <%= sync partial: 'todo_list_row', collection: Todo.by_user(current_user) %>
-    <%= sync_new partial: 'todo_list_row', resource: Todo.new, scope: Todo.by_user(current_user) %>
+    <%= sync partial: 'todo_list_row', collection: current_user.todos %>
+    <%= sync_new partial: 'todo_list_row', resource: Todo.new, scope: current_user %>
   </tbody>
 </table>
 

@@ -2,7 +2,7 @@ class TodosController < ApplicationController
   before_filter :authenticate_user!
   before_filter :find_project
 
-  enable_sync
+  # enable_sync
 
   def index
     @todos = @project.todos
@@ -40,6 +40,8 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.save
+        sync_new @todo
+        sync_update @project
         format.html { redirect_to [@todo.project, @todo], notice: 'Todo was successfully created.' }
         format.js { head :no_content }
       else
@@ -54,6 +56,8 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       if @todo.update_attributes(todo_params)
+        sync_update @todo
+        sync_update @project
         format.html { redirect_to [@todo.project, @todo], notice: 'Todo was successfully updated.' }
         format.js { head :no_content }
       else
@@ -67,6 +71,8 @@ class TodosController < ApplicationController
   def destroy
     @todo = @project.todos.find(params[:id])
     @todo.destroy
+    sync_destroy @todo
+    sync_update @project
 
     respond_to do |format|
       format.html { redirect_to project_path(@todo.project) }

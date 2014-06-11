@@ -14,3 +14,16 @@ class Sync.UserListRow extends Sync.View
   afterUpdate: -> @$el.fadeIn('slow')
 
   beforeRemove: -> @$el.fadeOut 'slow', => @remove()
+
+class Sync.TodoListRow extends Sync.View
+
+  beforeInsert: ($el, data) ->
+    console.log "beforeInsert"
+    console.log $el
+    console.log data
+    console.log @$el
+    console.log @
+    @insert($el)
+
+  afterUpdate: ->
+    console.log "afterInsert"

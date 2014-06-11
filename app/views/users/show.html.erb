@@ -8,8 +8,8 @@
     <col/>
   </colgroup>
   <tbody>
-    <%= sync partial: 'todo_list_row', collection: Todo.by_user(@user) %>
-    <%= sync_new partial: 'todo_list_row', resource: Todo.new, scope: Todo.by_user(@user) %>
+    <%= sync partial: 'todo_list_row', collection: @user.todos %>
+    <%= sync_new partial: 'todo_list_row', resource: Todo.new, scope: @user %>
   </tbody>
 </table>
 
